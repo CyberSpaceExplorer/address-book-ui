@@ -1,3 +1,11 @@
+# Prerequisites
+Install nvm if you don't have it already.
+* [`nvm`](https://github.com/nvm-sh/nvm):
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
+# or
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | zsh
+```
 To run the client, cd into the `address-book-ui` folder and run:
 
 ```bash
