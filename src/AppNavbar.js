@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
@@ -22,5 +23,5 @@ const AppNavbar = () => {
             </Navbar>
         </div>
     );
-};
+}
 export default AppNavbar;
