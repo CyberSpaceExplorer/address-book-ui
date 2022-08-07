@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const AppNavbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     return (
-        <div style={{display: 'block', width: 1410, padding: 10}}>
+        <div style={{display: 'block', width: 1440, padding: 10}}>
             <Navbar color="dark" dark >
                 <NavbarBrand tag={Link} to="/">Home</NavbarBrand>
                 <NavbarToggler onClick={() => { setIsOpen(!isOpen) }}/>
