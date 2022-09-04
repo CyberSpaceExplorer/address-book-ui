@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 import AppNavbar from './AppNavbar';
 import { Link } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 const ContactList = () => {
 
     const [contacts, setContacts] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [cookies] = useCookies(['XSRF-TOKEN']);
 
     useEffect(() => {
         setLoading(true);
@@ -22,10 +24,16 @@ const ContactList = () => {
     const remove = async (id) => {
         await fetch(`/api/contact/${id}`, {
             method: 'DELETE',
+            // headers: {
+            //     'Accept': 'application/json',
+            //     'Content-Type': 'application/json'
+            // }
             headers: {
+                'X-XSRF-TOKEN': cookies['XSRF-TOKEN'],
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
-            }
+            },
+            credentials: 'include'
         }).then(() => {
             let updatedContacts = [...contacts].filter(i => i.id !== id);
             setContacts(updatedContacts);

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import AppNavbar from './AppNavbar';
+import { useCookies } from 'react-cookie';
 
 const ContactEdit = () => {
     const initialFormState = {
@@ -17,6 +18,7 @@ const ContactEdit = () => {
     const [contact, setContact] = useState(initialFormState);
     const navigate = useNavigate();
     const { id } = useParams();
+    const [cookies] = useCookies(['XSRF-TOKEN']);
 
     useEffect(() => {
         if (id !== 'new') {
@@ -37,11 +39,17 @@ const ContactEdit = () => {
 
         await fetch('/api/contact' + (contact.id ? '/' + contact.id : ''), {
             method: (contact.id) ? 'PUT' : 'POST',
+            // headers: {
+            //     'Accept': 'application/json',
+            //     'Content-Type': 'application/json'
+            // },
             headers: {
+                'X-XSRF-TOKEN': cookies['XSRF-TOKEN'],
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(contact)
+            body: JSON.stringify(contact),
+            credentials: 'include'
         });
         setContact(initialFormState);
         navigate('/contacts');
